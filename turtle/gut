@@ -1,0 +1,19 @@
+tArgs = {...}
+length = tonumber(tArgs[1])
+
+
+turtle.select(1)
+
+
+
+-- копать тунель (1,2,length) устанавливая снизу блоки
+for i=1,length do
+	while turtle.detectUp() do
+		turtle.digUp()
+	end
+	turtle.placeDown()
+	turtle.dig()
+	turtle.forward()
+end
+
+

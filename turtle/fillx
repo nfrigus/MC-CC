@@ -1,0 +1,24 @@
+tArgs = {...}
+x = tonumber(tArgs[1])
+y = tonumber(tArgs[2])
+print('Building slab')
+
+
+
+for i=1,y do
+	for j=1,x do
+		turtle.placeDown()
+		if j < x then turtle.forward() end
+	end
+	if i%2 == 1 then
+		turtle.turnRight()
+		turtle.forward()
+		turtle.turnRight()
+	else
+		turtle.turnLeft()
+		turtle.forward()
+		turtle.turnLeft()
+	end
+end
+
+print('Done.')

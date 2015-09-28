@@ -1,0 +1,25 @@
+tArgs = {...}
+commands = tArgs[1]
+
+
+moveStep = function(dir)
+	if
+		dir == 'f' then turtle.forward()   elseif
+		dir == 'r' then turtle.turnRight() elseif
+		dir == 'l' then turtle.turnLeft()  elseif
+		dir == 'd' then turtle.down()      elseif
+		dir == 'u' then turtle.up()        elseif
+		dir == 'b' then turtle.back()
+		else return false
+	end
+end
+
+move = function(cmnd)
+	for i=1,string.len(cmnd) do
+		moveStep(string.sub(cmnd,i,i))
+	end
+end
+
+
+print('Yes, sir!')
+if commands then move(commands) end

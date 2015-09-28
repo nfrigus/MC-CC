@@ -1,0 +1,50 @@
+
+-- очистка области (x,y,z) от левого нижнего угла
+dig = function(x,y,z)
+	-- input
+	local x = tonumber(x)
+	local y = tonumber(y)
+	local z = tonumber(z)
+	-- local
+	local detectDigUp   = function() while not turtle.up()      do turtle.digUp()   end end
+	local detectDig     = function() while not turtle.forward() do turtle.dig()     end end
+	local detectDigDown = function() while not turtle.down()    do turtle.digDown() end end
+	local digStep = function(dir)
+		if
+			dir == 'l' then turtle.turnLeft() detectDig() turtle.turnRight() elseif
+			dir == 'r' then turtle.turnRight() detectDig() turtle.turnLeft() elseif
+			dir == 'u' then detectDigUp()   elseif
+			dir == 'd' then detectDigDown() elseif
+			dir == 'f' then detectDig()
+		end
+	end
+	local digDir = 'f'
+	-- foo
+	for iz=1,z do
+		for ix=1,x do
+			if (ix+(iz-1)*x)%2 == 1
+				then digDir = 'u'
+				else digDir = 'd'
+			end
+			for iy=1,y-1 do digStep(digDir) end
+			if ix ~= x then
+				if iz%2 == 1
+					then digStep('r')
+					else digStep('l')
+				end
+			end
+		end
+		if iz ~= z then digStep('f') end
+	end
+end
+
+
+tArgs = {...}
+x = tArgs[1]
+y = tArgs[2]
+z = tArgs[3]
+
+if not(x and y and z) then return false end
+print('Clearing area ('..x..','..y..','..z..')')
+dig(x,y,z)
+print('Done.')

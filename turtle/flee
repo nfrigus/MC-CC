@@ -1,0 +1,34 @@
+tArgs = {...}
+local direction = tArgs[1]
+
+
+
+run = function(dir)
+	if
+		dir == 'right' then dir = 'r' elseif
+		dir == 'down'  then dir = 'd' elseif
+		dir == 'up'    then dir = 'u' elseif
+		dir == 'back'  then dir = 'b' elseif
+		dir == 'left'  then dir = 'l'
+	end
+
+	if     dir == 'd' then while not turtle.detectDown() do turtle.down() end
+	elseif dir == 'u' then while not turtle.detectUp()   do turtle.up()   end
+	else
+		if dir == 'l' then turtle.turnLeft() elseif
+			 dir == 'r' then turtle.turnRight() elseif
+			 dir == 'b' then
+			turtle.turnLeft()
+			turtle.turnLeft()
+		end
+		while not turtle.detect() do turtle.forward() end
+	end
+end
+
+write('Will run to the end of '..direction)
+print('.')
+dir = run(direction)
+print('Bump! Cant move no more.')
+
+
+
